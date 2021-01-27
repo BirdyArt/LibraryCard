@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Singlecard from'./Singlecard';
 import Row from 'react-bootstrap/Row';
@@ -15,44 +15,19 @@ function Displaycards() {
   
   return (
     <Jumbotron className="text-center cardsdisplay">
+      {!cards.length ?
       <Row>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-        <Col xs={12} sm={6} lg={4} xl={3}>
-          <Singlecard />
-        </Col>
-      </Row>
+        <div className="spinner-border text-primary mx-auto" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </Row>  :
+      <Row>
+        {cards.map((card) => (
+          <Col key={card._id} xs={12} sm={6} lg={4} xl={3}>
+            <Singlecard card={card} />
+          </Col>
+        ))}
+      </Row>}
     </Jumbotron>
   );
 }

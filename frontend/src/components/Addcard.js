@@ -8,13 +8,12 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCard, updateCard } from '../actions/cards'
+import { createCard } from '../actions/cards';
 
 
-function Editcard(props) {
+function Addcard(props) {
   const [cardData, setCardData] = useState({ category: '', title: '', description: '', icon: '' });
-  const currentId = props.currentId;
-  const card = useSelector((state) => (currentId ? state.cards.find((c) => c._id === currentId) : null));
+  const card = useSelector((state) => state.card);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,13 +22,8 @@ function Editcard(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if(currentId === 0) {
-      dispatch(createCard(cardData));
-    } else {
-      dispatch(updateCard(currentId, cardData));
+    dispatch(createCard(cardData));
     }
-  }
   
   return (
     <Modal {...props} className="modal" centered aria-labelledby="login-modal">
@@ -37,7 +31,7 @@ function Editcard(props) {
         <Container className="text-center">
           <Row>
             <Col xs={12} className="text-center">
-              <h3 className="text-secondary">{currentId ? 'Edit Card' : 'Add Card'}</h3>
+              <h3 className="text-secondary">Add Card</h3>
             </Col>
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
@@ -71,4 +65,4 @@ function Editcard(props) {
   );
 }
 
-export default Editcard;
+export default Addcard;

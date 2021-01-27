@@ -180,6 +180,8 @@ button {
 }
   
 .cardsdisplay {
+  height:auto;
+  width:auto;
   border-radius: 0px;
   margin-bottom: 0px;
   background-color: #FDCA5C;
@@ -206,8 +208,10 @@ button {
   border-radius: 20px;
 
   .cardpic {
-    background: #F77B55;
-    padding-bottom:30px;
+    background-position: center;
+    background-size: cover;
+    background-repeat:no-repeat;
+    padding-bottom:150px;
     border-radius: 20px 20px 0px 0px;
 
     .cardbtns{
@@ -217,7 +221,7 @@ button {
 
       svg:hover {
         cursor:pointer;
-        opacity:60%;
+        color:#F77B55;
       }
     }
   }

@@ -9,7 +9,7 @@ import logo from '../assets/1.png';
 import { signin, getCards } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Displaycards from './Displaycards';
-import Editcard from './Editcard';
+import Addcard from './Addcard';
 
 
 
@@ -57,7 +57,7 @@ function Navigation() {
   </Navbar>
     <Login show={modalLoginShow} onHide={() => setModalLoginShow(false)} />
     <Register show={modalRegShow} onHide={() => setModalRegShow(false)} />
-    <Editcard show={modalCardShow} onHide={() => setModalCardShow(false)} />
+    <Addcard show={modalCardShow} onHide={() => setModalCardShow(false)} />
     {isLogged ? <Displaycards /> : <Hero />}
   </>
   );
