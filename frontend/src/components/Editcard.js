@@ -22,7 +22,6 @@ function Editcard(props) {
   }, [card])
 
   const clear = () => {
-    props.setCurrentId(0);
     setCardData({ category: '', title: '', description: '', icon: '' });
   };
 
