@@ -6,6 +6,8 @@ const cardsReducer = (cards =[], action) => {
       return action.payload;
     case 'CREATE':
       return [...cards, action.payload];
+    case 'DELETE':
+      return cards.filter((card) => card._id !== action.payload);
     default:
       return cards;
   }

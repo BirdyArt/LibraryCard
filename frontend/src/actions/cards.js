@@ -29,3 +29,13 @@ export const updateCard = (id, card) => async (dispatch) => {
     console.log(error.message);
   }
 }
+
+export const deleteCard = (id) => async (dispatch) => {
+  try {
+    await api.deleteCard(id);
+
+    dispatch({ type: 'DELETE', payload: id });
+  } catch (error) {
+    console.log(error.message);
+  }
+}

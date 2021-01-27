@@ -46,11 +46,25 @@ button {
     }
   }
 
-  .iconBtn {
+  input[type="file"] {
+    display: none;
+  }
+  .custom-file-upload {
     width:200px;
+    color: #25747D;
+    padding-top: 10px;
     height: 60px;
     font-size: 24px;
+    background:  #f36235;
+    opacity:85%;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 100%;
+    }
   }
+
 }
 
 .brandText {
@@ -91,7 +105,7 @@ button {
 
 .hero3 {
   background-color: #FDCA5C;
-  padding: 32px;
+  padding: 32px 32px 138px;
   img {
     width: 50%;
   }

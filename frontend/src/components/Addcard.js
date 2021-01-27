@@ -40,14 +40,17 @@ function Addcard(props) {
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  <FileBase
-                    type="file"
-                    multiple={false}
-                    onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Button className="text-secondary iconBtn" variant="warning">Add Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" /></Button>
+                  <label>
+                    <FileBase
+                      type="file"
+                      multiple={false}
+                      onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
+                    />
+                    <div className="custom-file-upload">
+                      Add Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" />  
+                    </div>
+                  </label>
+                  
                 </Form.Group>
                 <Form.Group controlId="formBasicCategory">
                   <Form.Control className="bg-danger formField" placeholder="Category" value={cardData.category} onChange={(e) => setCardData({ ...cardData, category: e.target.value })} />

@@ -5,10 +5,13 @@ import Col from 'react-bootstrap/Col';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Editcard from './Editcard';
+import { useDispatch } from 'react-redux';
+import { deleteCard } from'../actions/cards';
 
 function Singlecard({ card }) {
   const [modalCardShow, setModalCardShow] = useState(false);
   const [currentId, setCurrentId] = useState(null);
+  const dispatch = useDispatch();
 
     console.log(card._id);
 
@@ -21,7 +24,7 @@ function Singlecard({ card }) {
             <FontAwesomeIcon icon="edit" size="2x" color="#25747D" onClick={() => {setModalCardShow(true); setCurrentId(card._id)}} />
           </Col>
           <Col className="text-right">
-            <FontAwesomeIcon icon="times" size="2x" color="#25747D" />
+            <FontAwesomeIcon icon="times" size="2x" color="#25747D" onClick={() => dispatch(deleteCard(card._id))} />
           </Col>
         </Row>
       </div>
