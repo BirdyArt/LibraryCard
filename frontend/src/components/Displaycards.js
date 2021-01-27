@@ -14,9 +14,9 @@ function Displaycards() {
   console.log(cards);
   
   return (
-    <Jumbotron className="text-center cardsdisplay">
+    <Jumbotron className="text-center min-vh-100 cardsdisplay">
       {!cards.length ?
-      <Row>
+      <Row className="">
         <div className="spinner-border text-primary mx-auto" role="status">
           <span className="sr-only">Loading...</span>
         </div>

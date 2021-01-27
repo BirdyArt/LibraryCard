@@ -164,6 +164,7 @@ button {
 .footer {
   background-color: #62C97D;
   padding: 10px 0px;
+  margin-top: -106px;
 
   p {
     color:#25747D;
@@ -180,23 +181,27 @@ button {
 }
   
 .cardsdisplay {
-  height:auto;
-  width:auto;
   border-radius: 0px;
   margin-bottom: 0px;
   background-color: #FDCA5C;
-  padding: 75px 64px 20px;
+  padding: 75px 64px 126px;
+
+  .spinner-border {
+    position:absolute;
+    top:50%;
+    left:50%;
+  }
 }
 
 @media (min-width: 1366px) {
   .cardsdisplay {
-  padding: 75px 18vw 20px;
+  padding: 75px 18vw 126px;
   }
 }
 
 @media (max-width: $bootstrap-sm) {
   .cardsdisplay {
-  padding: 75px 30px 20px;
+  padding: 75px 30px 126px;
   }
 }
 

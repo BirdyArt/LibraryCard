@@ -21,6 +21,11 @@ function Editcard(props) {
     if(card) setCardData(card);
   }, [card])
 
+  const clear = () => {
+    props.setCurrentId(0);
+    setCardData({ category: '', title: '', description: '', icon: '' });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,6 +66,7 @@ function Editcard(props) {
                   <Form.Control className="bg-danger formField" placeholder="Short description" as="textarea" rows={4} value={cardData.description} onChange={(e) => setCardData({ ...cardData, description: e.target.value })} />
                 </Form.Group>
                 <Button className="text-secondary" variant="warning" onClick={props.onHide}>Close</Button>
+                <Button className="text-secondary" variant="warning" onClick={clear}>Clear</Button>
                 <Button className="text-secondary" variant="warning" type="submit">Save</Button>
               </Form>
             </Col>

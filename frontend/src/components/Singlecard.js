@@ -40,7 +40,7 @@ function Singlecard({ card }) {
         </Card.Text>
       </Card.Body>
     </Card>
-    <Editcard show={modalCardShow} currentId={currentId} onHide={() => setModalCardShow(false)} />
+    <Editcard show={modalCardShow} currentId={currentId} setCurrentId={setCurrentId} onHide={() => setModalCardShow(false)} />
     </>
   );
 }
