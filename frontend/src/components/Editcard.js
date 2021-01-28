@@ -8,7 +8,9 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCard, updateCard } from '../actions/cards'
+import { createCard, updateCard } from '../actions/cards';
+import imagePic from '../assets/image-solid.svg';
+
 
 
 function Editcard(props) {
@@ -34,7 +36,7 @@ function Editcard(props) {
       dispatch(updateCard(currentId, cardData));
     }
   }
-  
+
   return (
     <Modal {...props} className="modal" centered aria-labelledby="login-modal">
       <Modal.Body className="show-grid">
@@ -46,14 +48,17 @@ function Editcard(props) {
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  <FileBase
-                    type="file"
-                    multiple={false}
-                    onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Button className="text-secondary iconBtn" variant="warning">Add Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" /></Button>
+                  {cardData.icon ? <img src={cardData.icon} className="previewImg" alt="icon" /> : <img src={imagePic} className="emptyImg" alt="icon" /> }
+                  <label>
+                    <FileBase
+                      type="file"
+                      multiple={false}
+                      onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
+                    />
+                    <div className="custom-file-upload">
+                      Edit Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" />  
+                    </div>
+                  </label>
                 </Form.Group>
                 <Form.Group controlId="formBasicCategory">
                   <Form.Control className="bg-danger formField" placeholder="Category" value={cardData.category} onChange={(e) => setCardData({ ...cardData, category: e.target.value })} />

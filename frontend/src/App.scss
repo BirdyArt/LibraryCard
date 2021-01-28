@@ -56,13 +56,32 @@ button {
     height: 60px;
     font-size: 24px;
     background:  #f36235;
-    opacity:85%;
+    opacity:87%;
     border-radius: 10px;
     cursor: pointer;
 
-    &:hover {
-      opacity: 100%;
-    }
+      &:hover {
+        opacity: 100%;
+      }
+  }
+
+  .previewImg {
+    width:100px;
+    height:100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+
+  .emptyImg {
+    width:100px;
+    height: 100px;
+    background:  #f36235;
+    border-radius: 10px;
+    margin-right: 20px;
+    padding:20px;
+    opacity:87%;
+
   }
 
 }

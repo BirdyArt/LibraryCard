@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCard } from '../actions/cards';
+import imagePic from '../assets/image-solid.svg';
+
 
 
 function Addcard(props) {
@@ -27,6 +29,7 @@ function Addcard(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(createCard(cardData));
+    clear();
     }
   
   return (
@@ -40,6 +43,7 @@ function Addcard(props) {
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
+                  {cardData.icon ? <img src={cardData.icon} className="previewImg" alt="icon" /> : <img src={imagePic} className="emptyImg" alt="icon" /> }
                   <label>
                     <FileBase
                       type="file"
@@ -50,7 +54,6 @@ function Addcard(props) {
                       Add Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" />  
                     </div>
                   </label>
-                  
                 </Form.Group>
                 <Form.Group controlId="formBasicCategory">
                   <Form.Control className="bg-danger formField" placeholder="Category" value={cardData.category} onChange={(e) => setCardData({ ...cardData, category: e.target.value })} />
