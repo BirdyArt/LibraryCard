@@ -13,8 +13,6 @@ function Singlecard({ card }) {
   const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
-    console.log(card._id);
-
   return (
     <>
     <Card className="libcard">

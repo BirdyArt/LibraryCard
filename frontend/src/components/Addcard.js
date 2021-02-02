@@ -9,21 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCard } from '../actions/cards';
+import { getIcons, removeIcons } from '../actions/icons';
 import imagePic from '../assets/image-solid.svg';
-import axios from 'axios';
-
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
-
-const options = {
-  headers : { 'Authorization' : process.env.REACT_APP_ICONFINDER_API }
-};
-
 
 function Addcard(props) {
   const [cardData, setCardData] = useState({ category: '', title: '', description: '', icon: '' });
-  const [iconsData, setIconsData] = useState(null);
 
   const card = useSelector((state) => state.card);
+  const icons = useSelector((state) => state.icons);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,15 +34,10 @@ function Addcard(props) {
     clear();
   };
 
-  const handleIconsSearch = async (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      try {
-        const { data:response } = await axios.get(proxyurl + 'https://api.iconfinder.com/v4/icons/search?query=' + event.target.value + '&count=12&premium=0', options);;
-        setIconsData(response.icons);
-      } catch (error) {
-        console.log(error.message);
-      }
+  const handleIconsSearch = async (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      dispatch(getIcons(e.target.value));
     }
   }
   
@@ -78,9 +67,9 @@ function Addcard(props) {
                           Upload Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" /> 
                         </div>
                       </label>
-                      <div class="results">
-                        {iconsData ? iconsData.map((icon) => ( 
-                          <img src={icon.raster_sizes[8].formats[0].preview_url} onClick={() => {setIconsData(null);setCardData({ ...cardData, icon: icon.raster_sizes[8].formats[0].preview_url })}} alt="icon" ></img>
+                      <div className="results" >
+                        {icons ? icons.icons.map((icon) => ( 
+                          <img src={icon.raster_sizes[8].formats[0].preview_url} onClick={() => {setCardData({ ...cardData, icon: icon.raster_sizes[8].formats[0].preview_url }); dispatch(removeIcons())}} alt="icon" ></img>
                         )) : null}
                       </div>
                       <Form.Control  type="text" className="bg-danger formField" placeholder="Search icon" onKeyDown={handleIconsSearch} />

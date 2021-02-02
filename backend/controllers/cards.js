@@ -38,7 +38,6 @@ export const updateCard = async (req, res) => {
 
 export const deleteCard = async (req, res) => {
   const { id } = req.params;
-  const card = req.body;
     
   if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No card with that id');
 

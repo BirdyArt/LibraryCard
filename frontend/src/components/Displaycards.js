@@ -5,13 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useSelector } from 'react-redux';
 
-
-
 function Displaycards() {
 
   const cards = useSelector((state) => state.cards);
-
-  console.log(cards);
   
   return (
     <Jumbotron className="text-center min-vh-100 cardsdisplay">

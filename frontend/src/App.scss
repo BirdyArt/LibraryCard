@@ -283,11 +283,12 @@ button {
 .results {
     width: 360px;
     position: absolute;
-    left: 15px;
-    top: 150px;
-    background: #fff;
+    left: -148px;
+    top: 100px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #FDCA5C;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-    border-radius: 3px;
+    border-radius: 10px;
     z-index: 1000;
 }
 
