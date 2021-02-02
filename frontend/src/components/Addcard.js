@@ -10,11 +10,19 @@ import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCard } from '../actions/cards';
 import imagePic from '../assets/image-solid.svg';
+import axios from 'axios';
 
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
+const options = {
+  headers : { 'Authorization' : process.env.REACT_APP_ICONFINDER_API }
+};
 
 
 function Addcard(props) {
   const [cardData, setCardData] = useState({ category: '', title: '', description: '', icon: '' });
+  const [iconsData, setIconsData] = useState(null);
+
   const card = useSelector((state) => state.card);
   const dispatch = useDispatch();
 
@@ -30,7 +38,19 @@ function Addcard(props) {
     e.preventDefault();
     dispatch(createCard(cardData));
     clear();
+  };
+
+  const handleIconsSearch = async (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      try {
+        const { data:response } = await axios.get(proxyurl + 'https://api.iconfinder.com/v4/icons/search?query=' + event.target.value + '&count=12&premium=0', options);;
+        setIconsData(response.icons);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
+  }
   
   return (
     <Modal {...props} className="modal" centered aria-labelledby="login-modal">
@@ -43,17 +63,29 @@ function Addcard(props) {
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  {cardData.icon ? <img src={cardData.icon} className="previewImg" alt="icon" /> : <img src={imagePic} className="emptyImg" alt="icon" /> }
-                  <label>
-                    <FileBase
-                      type="file"
-                      multiple={false}
-                      onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
-                    />
-                    <div className="custom-file-upload">
-                      Add Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" />  
-                    </div>
-                  </label>
+                  <Row>
+                    <Col sm={{ span: 4, offset: 1 }} className="text-center">
+                      {cardData.icon ? <img src={cardData.icon} className="previewImg" alt="icon" /> : <img src={imagePic} className="emptyImg" alt="icon" /> }
+                    </Col>
+                    <Col xs={12} sm={6} className="my-auto">
+                      <label>
+                        <FileBase
+                          type="file"
+                          multiple={false}
+                          onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
+                        />
+                        <div className="custom-file-upload">
+                          Upload Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" /> 
+                        </div>
+                      </label>
+                      <div class="results">
+                        {iconsData ? iconsData.map((icon) => ( 
+                          <img src={icon.raster_sizes[8].formats[0].preview_url} onClick={() => {setIconsData(null);setCardData({ ...cardData, icon: icon.raster_sizes[8].formats[0].preview_url })}} alt="icon" ></img>
+                        )) : null}
+                      </div>
+                      <Form.Control  type="text" className="bg-danger formField" placeholder="Search icon" onKeyDown={handleIconsSearch} />
+                    </Col>
+                  </Row>
                 </Form.Group>
                 <Form.Group controlId="formBasicCategory">
                   <Form.Control className="bg-danger formField" placeholder="Category" value={cardData.category} onChange={(e) => setCardData({ ...cardData, category: e.target.value })} />

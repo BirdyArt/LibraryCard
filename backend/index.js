@@ -6,6 +6,7 @@ import cors from 'cors';
 import cardRoutes from './routes/cards.js';
 dotenv.config()
 const app = express();
+console.log(process.env.ATLAS_URI);
 
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));

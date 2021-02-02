@@ -50,11 +50,12 @@ button {
     display: none;
   }
   .custom-file-upload {
-    width:200px;
     color: #25747D;
-    padding-top: 10px;
-    height: 60px;
-    font-size: 24px;
+    height: 38px;
+    padding-top:6px;
+    margin-top:10px;
+    width:164.99px;
+    font-size: 16px;
     background:  #f36235;
     opacity:87%;
     border-radius: 10px;
@@ -66,24 +67,22 @@ button {
   }
 
   .previewImg {
+    margin-top:10px;
     width:100px;
     height:100px;
     object-fit: cover;
     border-radius: 10px;
-    margin-right: 20px;
   }
 
   .emptyImg {
     width:100px;
+    margin-top:10px;
     height: 100px;
     background:  #f36235;
     border-radius: 10px;
-    margin-right: 20px;
     padding:20px;
     opacity:87%;
-
   }
-
 }
 
 .brandText {
@@ -279,4 +278,23 @@ button {
     width:150px;
 
   }
+}
+
+.results {
+    width: 360px;
+    position: absolute;
+    left: 15px;
+    top: 150px;
+    background: #fff;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    z-index: 1000;
+}
+
+.results img {
+    margin: 10px;
+    width:50px;
+    height:auto;
+    vertical-align: middle;
+    cursor: pointer;
 }
