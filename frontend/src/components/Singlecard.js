@@ -26,7 +26,7 @@ function Singlecard({ card }) {
             <FontAwesomeIcon icon="times" size="2x" color="#25747D" onClick={() => dispatch(deleteCard(card._id))} />
           </Col>
         </Row>
-        <Image src={card.icon} roundedCircle />
+        <Image src={card.icon} />
       </div>
       <Card.Body className="cardbody">
         <Row>

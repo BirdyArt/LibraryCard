@@ -8,8 +8,11 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCard, updateCard } from '../actions/cards';
+import { updateCard } from '../actions/cards';
 import imagePic from '../assets/image-solid.svg';
+import { getIcons } from '../actions/icons';
+import Displayicons from'./Displayicons';
+
 
 
 
@@ -18,6 +21,7 @@ function Editcard(props) {
   const currentId = props.currentId;
   const card = useSelector((state) => (currentId ? state.cards.find((c) => c._id === currentId) : null));
   const dispatch = useDispatch();
+  const [modalIconsShow, setModalIconsShow] = useState(false);
 
   useEffect(() => {
     if(card) setCardData(card);
@@ -29,15 +33,19 @@ function Editcard(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(updateCard(currentId, cardData));
+  }
 
-    if(currentId === 0) {
-      dispatch(createCard(cardData));
-    } else {
-      dispatch(updateCard(currentId, cardData));
+  const handleIconsSearch = async (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      dispatch(getIcons(e.target.value));
+      setModalIconsShow(true);
     }
   }
 
   return (
+  <>
     <Modal {...props} className="modal" centered aria-labelledby="login-modal">
       <Modal.Body className="show-grid">
         <Container className="text-center">
@@ -48,17 +56,24 @@ function Editcard(props) {
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  {cardData.icon ? <img src={cardData.icon} className="previewImg" alt="icon" /> : <img src={imagePic} className="emptyImg" alt="icon" /> }
-                  <label>
-                    <FileBase
-                      type="file"
-                      multiple={false}
-                      onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
-                    />
-                    <div className="custom-file-upload">
-                      Edit Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" />  
-                    </div>
-                  </label>
+                  <Row>
+                    <Col sm={{ span: 4, offset: 1 }} className="text-center">
+                      {cardData.icon ? <img src={cardData.icon} className="previewImg" alt="icon" /> : <img src={imagePic} className="emptyImg" alt="icon" /> }
+                    </Col>
+                    <Col xs={12} sm={6} className="my-auto">
+                      <label>
+                        <FileBase
+                          type="file"
+                          multiple={false}
+                          onDone={({base64}) => setCardData({ ...cardData, icon: base64 })}
+                        />
+                        <div className="custom-file-upload">
+                          Upload Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" /> 
+                        </div>
+                      </label>
+                      <Form.Control  type="text" className="bg-danger formField" placeholder="Search icon" onKeyDown={handleIconsSearch} />
+                    </Col>
+                  </Row>
                 </Form.Group>
                 <Form.Group controlId="formBasicCategory">
                   <Form.Control className="bg-danger formField" placeholder="Category" value={cardData.category} onChange={(e) => setCardData({ ...cardData, category: e.target.value })} />
@@ -78,6 +93,8 @@ function Editcard(props) {
         </Container>
       </Modal.Body>
     </Modal>
+    <Displayicons setCardData={setCardData} show={modalIconsShow} onHide={() => setModalIconsShow(false)} />
+  </>
   );
 }
 
