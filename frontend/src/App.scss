@@ -245,11 +245,16 @@ button {
   border-radius: 20px;
 
   .cardpic {
-    background-position: center;
-    background-size: cover;
-    background-repeat:no-repeat;
-    padding-bottom:150px;
+    padding-bottom:20px;
+    background-color:#F77B55;
     border-radius: 20px 20px 0px 0px;
+
+    img {
+      width: 150px;
+      height: 150px;
+      margin-top: -25px;
+      border: 3px solid #25747D;
+    }
 
     .cardbtns{
       background: none;
@@ -258,7 +263,7 @@ button {
 
       svg:hover {
         cursor:pointer;
-        color:#F77B55;
+        color:#62C97D;
       }
     }
   }
@@ -276,25 +281,20 @@ button {
   img {
     height: auto;
     width:150px;
-
   }
 }
 
 .results {
-    width: 360px;
-    position: absolute;
-    left: -148px;
-    top: 100px;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #FDCA5C;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     border-radius: 10px;
-    z-index: 1000;
+    background-color:#FDCA5C;
+    border: 2px solid #F77B55;
+    padding: 10px;
 }
 
 .results img {
-    margin: 10px;
-    width:50px;
+    padding: 5px;
+    width:68px;
     height:auto;
     vertical-align: middle;
     cursor: pointer;

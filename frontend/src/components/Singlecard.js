@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Editcard from './Editcard';
@@ -16,7 +17,7 @@ function Singlecard({ card }) {
   return (
     <>
     <Card className="libcard">
-      <div className="cardpic" style={{backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(" + card.icon + ")"}}>
+      <div className="cardpic">
         <Row className="cardbtns">
           <Col className="text-left">
             <FontAwesomeIcon icon="edit" size="2x" color="#25747D" onClick={() => {setModalCardShow(true); setCurrentId(card._id)}} />
@@ -25,6 +26,7 @@ function Singlecard({ card }) {
             <FontAwesomeIcon icon="times" size="2x" color="#25747D" onClick={() => dispatch(deleteCard(card._id))} />
           </Col>
         </Row>
+        <Image src={card.icon} roundedCircle />
       </div>
       <Card.Body className="cardbody">
         <Row>

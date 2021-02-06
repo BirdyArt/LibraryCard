@@ -9,14 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCard } from '../actions/cards';
-import { getIcons, removeIcons } from '../actions/icons';
+import { getIcons } from '../actions/icons';
 import imagePic from '../assets/image-solid.svg';
+import Displayicons from'./Displayicons';
+
 
 function Addcard(props) {
   const [cardData, setCardData] = useState({ category: '', title: '', description: '', icon: '' });
+  const [modalIconsShow, setModalIconsShow] = useState(false);
 
   const card = useSelector((state) => state.card);
-  const icons = useSelector((state) => state.icons);
 
   const dispatch = useDispatch();
 
@@ -38,10 +40,12 @@ function Addcard(props) {
     if (e.key === 'Enter') {
       e.preventDefault();
       dispatch(getIcons(e.target.value));
+      setModalIconsShow(true);
     }
   }
   
   return (
+  <>
     <Modal {...props} className="modal" centered aria-labelledby="login-modal">
       <Modal.Body className="show-grid">
         <Container className="text-center">
@@ -67,11 +71,6 @@ function Addcard(props) {
                           Upload Icon <FontAwesomeIcon icon="plus-circle" size="lg" color="#25747D" /> 
                         </div>
                       </label>
-                      <div className="results" >
-                        {icons ? icons.icons.map((icon) => ( 
-                          <img src={icon.raster_sizes[8].formats[0].preview_url} onClick={() => {setCardData({ ...cardData, icon: icon.raster_sizes[8].formats[0].preview_url }); dispatch(removeIcons())}} alt="icon" ></img>
-                        )) : null}
-                      </div>
                       <Form.Control  type="text" className="bg-danger formField" placeholder="Search icon" onKeyDown={handleIconsSearch} />
                     </Col>
                   </Row>
@@ -94,6 +93,8 @@ function Addcard(props) {
         </Container>
       </Modal.Body>
     </Modal>
+    <Displayicons setCardData={setCardData} show={modalIconsShow} onHide={() => setModalIconsShow(false)} />
+  </>
   );
 }
 

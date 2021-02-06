@@ -14,7 +14,7 @@ export const getIcons = async (req, res) => {
   const searchTerm = req.query.searchTerm;
 
   try {
-    const { data:response } = await axios.get('https://api.iconfinder.com/v4/icons/search?query=' + searchTerm + '&count=15&premium=0', options);
+    const { data:response } = await axios.get('https://api.iconfinder.com/v4/icons/search?query=' + searchTerm + '&count=12&premium=0&style=flat', options);
     const newIcons = new iconsModel({icons: response.icons});
     res.status(201).json(newIcons);
   } catch (error) {
