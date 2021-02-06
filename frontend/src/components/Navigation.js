@@ -3,29 +3,44 @@ import Login from'./Login';
 import Register from'./Register';
 import Hero from'./Hero';
 import Navbar from 'react-bootstrap/Navbar';
+import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import logo from '../assets/1.png';
-import { signin, getCards } from '../actions';
-import { useSelector, useDispatch } from 'react-redux';
+import { getCards } from '../actions';
+import { useDispatch } from 'react-redux';
 import Displaycards from './Displaycards';
 import Addcard from './Addcard';
 
 
 
 function Navigation() {
-  const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   
+  console.log(user);
+
   useEffect(() => {
     dispatch(getCards());
   }, [dispatch]);
+
+
+
+  // useEffect(() => {
+  //   const token = user?.token;
+
+
+  //   setUser(JSON.parse(localStorage.getItem('profile')));
+  // }, []);
 
   const [modalLoginShow, setModalLoginShow] = useState(false);
   const [modalRegShow, setModalRegShow] = useState(false);
   const [modalCardShow, setModalCardShow] = useState(false);
 
-
+  const logout =() =>{
+    dispatch({ type: 'LOGOUT'});
+    setUser(null);
+  }
   return (
   <>
   <Navbar fixed="top" collapseOnSelect expand="md" bg="primary" variant="dark">
@@ -42,10 +57,12 @@ function Navigation() {
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ml-auto">
-        {isLogged ?
+        {user ?
         <>
+        <Image src={user.result.imageUrl} roundedCircle />
+        <p>{user.result.name}</p>
         <Button className="text-secondary" variant="danger" onClick={() => setModalCardShow(true)}>Add Card</Button>
-        <Button className="text-secondary" variant="warning" onClick={() => {dispatch(signin())}}>Log Out</Button>
+        <Button className="text-secondary" variant="warning" onClick={logout}>Log Out</Button>
         </>
          : 
         <>
@@ -55,10 +72,10 @@ function Navigation() {
       </Nav>
     </Navbar.Collapse>
   </Navbar>
-    <Login show={modalLoginShow} onHide={() => setModalLoginShow(false)} />
+    <Login show={modalLoginShow} setUser={setUser} onHide={() => setModalLoginShow(false)} />
     <Register show={modalRegShow} onHide={() => setModalRegShow(false)} />
     <Addcard show={modalCardShow} onHide={() => setModalCardShow(false)} />
-    {isLogged ? <Displaycards /> : <Hero />}
+    {user ? <Displaycards /> : <Hero />}
   </>
   );
 }

@@ -1,12 +1,12 @@
-import loggedReducer from './isLogged';
 import cardsReducer from'./cards';
 import {combineReducers} from 'redux';
 import iconsReducer from './icons';
+import authReducer from './auth';
 
 const allReducer = combineReducers({
-  isLogged: loggedReducer,
   cards: cardsReducer,
-  icons: iconsReducer
+  icons: iconsReducer,
+  auth: authReducer
 });
 
 export default allReducer;

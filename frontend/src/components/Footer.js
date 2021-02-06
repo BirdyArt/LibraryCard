@@ -12,7 +12,7 @@ function Footer() {
         className="d-inline-block align-top"
       />{' '}
       <hr />
-      <p>© LibraryCard, Inc. 2021. We love our users!</p>
+      <p>© LibraryCard, Inc. 2021. Memento vivere!</p>
     </div>
   );
 }
