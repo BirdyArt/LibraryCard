@@ -22,15 +22,6 @@ function Navigation() {
     dispatch(getCards());
   }, [dispatch]);
 
-
-
-  // useEffect(() => {
-  //   const token = user?.token;
-
-
-  //   setUser(JSON.parse(localStorage.getItem('profile')));
-  // }, []);
-
   const [modalLoginShow, setModalLoginShow] = useState(false);
   const [modalRegShow, setModalRegShow] = useState(false);
   const [modalCardShow, setModalCardShow] = useState(false);
@@ -39,6 +30,7 @@ function Navigation() {
     dispatch({ type: 'LOGOUT'});
     setUser(null);
   }
+  
   return (
   <>
   <Navbar fixed="top" collapseOnSelect expand="md" bg="primary" variant="dark">
@@ -57,7 +49,7 @@ function Navigation() {
       <Nav className="ml-auto">
         {user ?
         <>
-        <Image src={user.result.imageUrl} roundedCircle />
+        {user.result.imageUrl ? <Image src={user.result.imageUrl} roundedCircle /> : <div id="profileImage">{user.result.name.charAt(0)}</div>}
         <p>{user.result.name}</p>
         <Button className="text-secondary" variant="danger" onClick={() => setModalCardShow(true)}>Add Card</Button>
         <Button className="text-secondary" variant="warning" onClick={logout}>Log Out</Button>
@@ -71,7 +63,7 @@ function Navigation() {
     </Navbar.Collapse>
   </Navbar>
     <Login show={modalLoginShow} setUser={setUser} onHide={() => setModalLoginShow(false)} />
-    <Register show={modalRegShow} onHide={() => setModalRegShow(false)} />
+    <Register show={modalRegShow} setUser={setUser} onHide={() => setModalRegShow(false)} />
     <Addcard show={modalCardShow} onHide={() => setModalCardShow(false)} />
     {user ? <Displaycards /> : <Hero />}
   </>

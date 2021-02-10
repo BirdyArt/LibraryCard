@@ -35,7 +35,9 @@ function Login(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login(formData));
+    await dispatch(login(formData));
+    props.onHide();
+    props.setUser(JSON.parse(localStorage.getItem('profile')));
   };
 
   return (

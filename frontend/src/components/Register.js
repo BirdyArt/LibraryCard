@@ -12,13 +12,14 @@ import { register } from '../actions/auth';
 function Register(props) {
   const dispatch = useDispatch();
 
-  const initialState = { username: '', email: '', password: '', confirm: '' };
+  const initialState = { name: '', email: '', password: '', confirm: '' };
   const [formData, setFormData] = useState(initialState);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    dispatch(register(formData));
+    await dispatch(register(formData));
+    props.onHide();
+    props.setUser(JSON.parse(localStorage.getItem('profile')));
   };
 
   return (
@@ -32,7 +33,7 @@ function Register(props) {
             <Col sm={{ span: 10, offset: 1 }} className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formName">
-                  <Form.Control className="bg-danger formField" onChange={(e) => setFormData({ ...formData, username: e.target.value })} placeholder="Username" />      
+                  <Form.Control className="bg-danger formField" onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Username" />      
                 </Form.Group>
                 <Form.Group controlId="formEmail">
                   <Form.Control className="bg-danger formField" onChange={(e) => setFormData({ ...formData, email: e.target.value })} type="email" placeholder="Email address" />
