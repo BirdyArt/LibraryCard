@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cardRoutes from './routes/cards.js';
 import iconsRoutes from './routes/icons.js';
+import userRoutes from './routes/users.js';
+
 
 dotenv.config()
 const app = express();
@@ -15,6 +17,8 @@ app.use(cors());
 
 app.use('/cards', cardRoutes);
 app.use('/icons', iconsRoutes);
+app.use('/user', userRoutes);
+
 
 const CONNECTION_URL = process.env.ATLAS_URI;
 const PORT = process.env.PORT || 5000;

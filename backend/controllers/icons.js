@@ -8,8 +8,6 @@ const options = {
   headers : { 'Authorization' : process.env.ICONFINDER_API }
 };
 
-console.log(options);
-
 export const getIcons = async (req, res) => {
   const searchTerm = req.query.searchTerm;
 
