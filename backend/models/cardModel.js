@@ -5,6 +5,7 @@ const cardSchema = mongoose.Schema({
   description: String,
   category: String,
   icon: String,
+  creator: String,
   createdAt: {
     type:Date,
     default: new Date()

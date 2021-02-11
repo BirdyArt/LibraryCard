@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const API = axios.create({ baseUrl: 'http://localhost:5000' });
 
+API.interceptors.request.use((req) => {
+  if(localStorage.getItem('profile')) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+  }
+
+  return req;
+});
+
 export const fetchCards = () => API.get('/cards');
 export const createCard = (newCard) => API.post('/cards', newCard);
 export const updateCard = (id, updatedCard) => API.patch(`/cards/${id}`, updatedCard);

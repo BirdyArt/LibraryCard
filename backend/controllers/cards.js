@@ -5,8 +5,6 @@ export const getCards = async (req, res) => {
   try {
     const cards = await cardModel.find();
 
-    console.log(cards);
-
     res.status(200).json(cards);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -16,7 +14,7 @@ export const getCards = async (req, res) => {
 export const createCard = async (req, res) => {
   const card = req.body;
     
-  const newCard= new cardModel(card);
+  const newCard = new cardModel({ ...card, creator: req.userId, createdAt: new Date().toISOString() });
   try {
     await newCard.save();
     res.status(201).json(newCard);

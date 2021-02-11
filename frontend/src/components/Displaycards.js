@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux';
 function Displaycards() {
 
   const cards = useSelector((state) => state.cards);
-  
+  const user = JSON.parse(localStorage.getItem('profile'));
+
   return (
     <Jumbotron className="text-center min-vh-100 cardsdisplay">
       {!cards.length ?
@@ -18,7 +19,7 @@ function Displaycards() {
         </div>
       </Row>  :
       <Row>
-        {cards.map((card) => (
+        {cards.filter((card) => (user?.result?.googleId === card?.creator || user?.result?._id === card?.creator)).map((card) => (
           <Col key={card._id} xs={12} sm={6} lg={4} xl={3}>
             <Singlecard card={card} />
           </Col>

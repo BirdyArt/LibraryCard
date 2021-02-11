@@ -11,6 +11,7 @@ import { getCards } from '../actions';
 import { useDispatch } from 'react-redux';
 import Displaycards from './Displaycards';
 import Addcard from './Addcard';
+import decode from 'jwt-decode';
 
 
 
@@ -30,6 +31,18 @@ function Navigation() {
     dispatch({ type: 'LOGOUT'});
     setUser(null);
   }
+
+ useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [window.location]);
   
   return (
   <>
