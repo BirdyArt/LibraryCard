@@ -19,6 +19,10 @@ app.use('/cards', cardRoutes);
 app.use('/icons', iconsRoutes);
 app.use('/user', userRoutes);
 
+app.get('/', (req,res) =>  {
+  res.send('Hello to LibraryCard API');
+});
+
 
 const CONNECTION_URL = process.env.ATLAS_URI;
 const PORT = process.env.PORT || 5000;
