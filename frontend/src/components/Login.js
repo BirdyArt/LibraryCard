@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GoogleLogin } from 'react-google-login';
 import { login } from '../actions/auth';
 
-
 const initialState = { email: '', password: '' };
 
 function Login(props) {
@@ -30,7 +29,7 @@ function Login(props) {
   };
 
   const googleFailure = () => {
-    console.log("Google Sign In was unsuccessful. Try again later.");
+    alert("Google Sign In was unsuccessful. Try again later.");
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +45,7 @@ function Login(props) {
         <Container className="text-center">
           <Row>
             <Col xs={12} className="text-center">
-              <h3 className="text-secondary">Start creating your cards today!</h3>
+              <h3 className="text-secondary">We glad you are back!</h3>
             </Col>
             <Col xs={12} className="text-center">
               <GoogleLogin 

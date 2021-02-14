@@ -17,9 +17,7 @@ import Displayicons from'./Displayicons';
 function Addcard(props) {
   const [cardData, setCardData] = useState({ category: '', title: '', description: '', icon: '' });
   const [modalIconsShow, setModalIconsShow] = useState(false);
-
   const card = useSelector((state) => state.card);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -13,9 +13,6 @@ import imagePic from '../assets/image-solid.svg';
 import { getIcons } from '../actions/icons';
 import Displayicons from'./Displayicons';
 
-
-
-
 function Editcard(props) {
   const [cardData, setCardData] = useState({ category: '', title: '', description: '', icon: '' });
   const currentId = props.currentId;

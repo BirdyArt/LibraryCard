@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import { useSelector } from 'react-redux';
 
 function Displaycards() {
-
   const cards = useSelector((state) => state.cards);
   const user = JSON.parse(localStorage.getItem('profile'));
 

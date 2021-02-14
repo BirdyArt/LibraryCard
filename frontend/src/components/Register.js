@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { register } from '../actions/auth';
 
-
 function Register(props) {
   const dispatch = useDispatch();
 

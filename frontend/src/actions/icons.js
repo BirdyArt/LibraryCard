@@ -14,5 +14,5 @@ export const getIcons = (searchTerm) => async (dispatch) => {
 export const removeIcons = () => {
   return {
     type: REMOVE_ICONS
-  };
-};
+  }
+}

@@ -13,8 +13,6 @@ import Displaycards from './Displaycards';
 import Addcard from './Addcard';
 import decode from 'jwt-decode';
 
-
-
 function Navigation() {
   const dispatch = useDispatch();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -62,7 +60,7 @@ function Navigation() {
       <Nav className="ml-auto">
         {user ?
         <>
-        {user.result.imageUrl ? <Image src={user.result.imageUrl} roundedCircle /> : <div id="profileImage">{user.result.name.charAt(0)}</div>}
+        {user.result.imageUrl ? <Image src={user.result.imageUrl} roundedCircle /> : <div className="profileImage">{user.result.name.charAt(0)}</div>}
         <p>{user.result.name}</p>
         <Button className="text-secondary" variant="danger" onClick={() => setModalCardShow(true)}>Add Card</Button>
         <Button className="text-secondary" variant="warning" onClick={logout}>Log Out</Button>
