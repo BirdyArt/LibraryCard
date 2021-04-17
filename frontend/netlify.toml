@@ -1,0 +1,17 @@
+[[redirects]]
+  from = "https://library-card.netlify.app/cards/*"
+  to = "https://librarycard.herokuapp.com/cards/:splat"
+  status = 200
+  force = true
+
+  [[redirects]]
+  from = "https://library-card.netlify.app/icons/*"
+  to = "https://librarycard.herokuapp.com/icons/:splat"
+  status = 200
+  force = true
+
+  [[redirects]]
+  from = "https://library-card.netlify.app/user/*"
+  to = "https://librarycard.herokuapp.com/user/:splat"
+  status = 200
+  force = true
